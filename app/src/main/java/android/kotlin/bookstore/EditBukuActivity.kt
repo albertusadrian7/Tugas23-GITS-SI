@@ -20,14 +20,12 @@ class EditBukuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_buku)
-        var idBuku = intent.getStringExtra("idBuku")
-        idBuku?.let { getDetailBuku(it) }
+        inputEditId.setText(intent.getStringExtra("idBuku"))
+        inputEditJudul.setText(intent.getStringExtra("judulBuku"))
+        inputEditHarga.setText(intent.getStringExtra("penulis"))
+        inputEditPenulis.setText(intent.getStringExtra("rating"))
+        inputEditRating.setText(intent.getStringExtra("harga"))
         btnEdit.setOnClickListener {
-            inputEditId.setText(intent.getStringExtra("idBuku"))
-            inputEditJudul.setText(intent.getStringExtra("judulBuku"))
-            inputEditHarga.setText(intent.getStringExtra("penulis"))
-            inputEditPenulis.setText(intent.getStringExtra("rating"))
-            inputEditRating.setText(intent.getStringExtra("harga"))
             btnEdit.setOnClickListener {
                 RetrofitClient.instance.updateBuku(
                     inputId.text.toString().trim(),
@@ -67,24 +65,6 @@ class EditBukuActivity : AppCompatActivity() {
                 })
             }
         }
-    }
-    private fun getDetailBuku(id: String){
-        RetrofitClient.instance.getBukuList(id!!.toString())
-            .enqueue(object : Callback<BukuResponse>{
-                override fun onResponse(call: Call<BukuResponse>?, response: Response<BukuResponse>?) {
-                    if (response!!.isSuccessful){
-                        val toast = Toast.makeText(this@EditBukuActivity, "Edit Buku", Toast.LENGTH_LONG)
-                        toast.show()
-                    } else {
-                        val toast = Toast.makeText(this@EditBukuActivity, "Gagal memberikan response untuk edit", Toast.LENGTH_LONG)
-                        toast.show()
-                    }
-                }
-                override fun onFailure(call: Call<BukuResponse>, t: Throwable) {
-                    val toast = Toast.makeText(this@EditBukuActivity, "Gagal memberikan response", Toast.LENGTH_LONG)
-                    toast.show()
-                }
-            })
     }
 
 }

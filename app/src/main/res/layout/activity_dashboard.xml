@@ -9,37 +9,6 @@
     android:paddingHorizontal="15dp"
     android:background="@color/sky_blue"
     tools:context=".DashboardActivity">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:textColor="@color/dark_blue"
-            android:textStyle="bold"
-            android:layout_weight="4"
-            android:text="Daftar User" />
-        <Button
-            android:id="@+id/btnTambahUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_button"
-            android:textColor="@color/white"
-            android:fontFamily="@font/poppins_semibold"
-            android:textSize="12sp"
-            android:layout_weight="1"
-            android:textAllCaps="false"
-            android:text="Tambah User"/>
-    </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:clipToPadding="false"
-        tools:listitem="@layout/card_user"/>
 
 </LinearLayout>

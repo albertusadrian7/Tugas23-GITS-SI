@@ -1,16 +1,15 @@
 package android.kotlin.bookstore
 
 import android.content.Intent
+import android.kotlin.bookstore.adapter.BukuAdapter
 import android.kotlin.bookstore.model.BukuResponse
 import android.kotlin.bookstore.model.DataItem
 import android.kotlin.bookstore.model.DefaultResponse
-import android.kotlin.bookstore.service.BukuApiInterface
 import android.kotlin.bookstore.service.RetrofitClient
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_edit_buku.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.btnTambah
@@ -69,7 +68,6 @@ class MainActivity : AppCompatActivity() {
     private fun getBukuData(){
         api.getBukuList("get_buku").enqueue(object: Callback<BukuResponse> {
             override fun onResponse(call: Call<BukuResponse>?, response: Response<BukuResponse>?) {
-//                recyclerBuku.adapter = BukuAdapter(response?.body()?.data as ArrayList<DataItem>)
                 if (response!!.isSuccessful){
                     response.body()?.let { tampilBuku(it) }
                     Toast.makeText(this@MainActivity, "Daftar Buku", Toast.LENGTH_LONG).show()

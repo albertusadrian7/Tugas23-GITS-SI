@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,122 +8,121 @@
     android:padding="20dp"
     android:background="@color/sky_blue"
     tools:context=".TambahBukuActivity">
+
     <TextView
+        android:id="@+id/tambahBukuTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tambah Buku"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_bold"
-        android:textSize="20sp"
+        android:text="Tambah Buku"
         android:textColor="@color/dark_blue"
-        />
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="2dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:orientation="vertical"
-        android:paddingVertical="30dp"
-        android:paddingHorizontal="20dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/card_box"
-        >
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tambahBukuTitle">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ID Buku"
             android:fontFamily="@font/poppins_semibold"
-            android:textColor="@color/dark_blue"
-            android:textSize="14sp"
-            />
-        <EditText
-            android:id="@+id/inputId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Masukkan id"
-            android:textSize="14sp"
-            android:inputType="number"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Judul Buku"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/dark_blue"
-            android:textSize="14sp"
-            />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/inputJudul"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="14sp"
+            android:layout_height="50dp"
+            android:background="@drawable/custom_input"
+            android:padding="10dp"
+            android:hint="Judul Buku"
             android:inputType="textPersonName"
-            android:hint="Judul Buku" />
+            android:textSize="14sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Penulis Buku"
-            android:fontFamily="@font/poppins_semibold"
-            android:textColor="@color/dark_blue"
             android:layout_marginTop="20dp"
-            android:textSize="14sp"
-            />
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Penulis Buku"
+            android:textColor="@color/dark_blue"
+            android:textSize="14sp" />
+
         <EditText
             android:id="@+id/inputPenulis"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="14sp"
+            android:layout_height="50dp"
+            android:background="@drawable/custom_input"
+            android:padding="10dp"
+            android:hint="Penulis Buku"
             android:inputType="textPersonName"
-            android:hint="Penulis Buku" />
+            android:textSize="14sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rating Buku"
-            android:fontFamily="@font/poppins_semibold"
-            android:textColor="@color/dark_blue"
             android:layout_marginTop="20dp"
-            android:textSize="14sp"
-            />
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Rating Buku"
+            android:textColor="@color/dark_blue"
+            android:textSize="14sp" />
+
         <EditText
             android:id="@+id/inputRating"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="14sp"
+            android:layout_height="50dp"
+            android:background="@drawable/custom_input"
+            android:padding="10dp"
+            android:hint="Rating Buku"
             android:inputType="numberDecimal"
-            android:hint="Rating Buku" />
+            android:textSize="14sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Harga Buku"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_semibold"
+            android:text="Harga Buku"
             android:textColor="@color/dark_blue"
-            android:textSize="14sp"
-            />
+            android:textSize="14sp" />
+
         <EditText
             android:id="@+id/inputHarga"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="14sp"
+            android:layout_height="50dp"
+            android:background="@drawable/custom_input"
+            android:padding="10dp"
+            android:hint="Harga"
             android:inputType="number"
-            android:hint="Harga" />
+            android:textSize="14sp" />
     </LinearLayout>
+
     <Button
         android:id="@+id/btnTambah"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Simpan Buku"
-        android:padding="10dp"
-        android:backgroundTint="@color/dark_blue"
-        android:textColor="@color/white"
-        android:layout_marginTop="50dp"
         android:layout_gravity="center"
-        android:textAllCaps="false"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/custom_button"
-        />
-</LinearLayout>
+        android:backgroundTint="@color/dark_blue"
+        android:padding="10dp"
+        android:text="Simpan Buku"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

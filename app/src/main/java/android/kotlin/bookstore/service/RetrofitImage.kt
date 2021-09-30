@@ -8,7 +8,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitImage {
     val BASE_URL = "http://192.168.43.84/bukuRestApi/"
-    val IMAGE_URL = BASE_URL+"user_img/"
 
     fun getInterceptor() : OkHttpClient {
         val logging = HttpLoggingInterceptor()

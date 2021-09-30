@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_user"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="@color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        >
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/gambarUser"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/user"
+            app:shapeAppearanceOverlay="@style/roundSquare" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toEndOf="@+id/gambarUser"
+            android:layout_toRightOf="@+id/gambarUser"
+            android:layout_alignTop="@+id/gambarUser"
+            android:layout_alignBottom="@+id/gambarUser"
+            android:gravity="center"
+            android:padding="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="12sp"
+                    android:text="Nama: " />
+
+                <TextView
+                    android:id="@+id/nama"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:paddingEnd="10dp"
+                    android:text="Text Nama"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Username: "
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/dark_blue"
+                    />
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:paddingEnd="10dp"
+                    android:text="Text username"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email: "
+                    android:textColor="@color/dark_blue"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Text email"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="12sp"
+                    android:paddingEnd="10dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alamat: "
+                    android:textColor="@color/dark_blue"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:id="@+id/alamat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Text alamat"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <!--        <Button-->
+        <!--            android:id="@+id/btnDelete"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_toEndOf="@id/end"-->
+        <!--            android:backgroundTint="@color/dark_blue"-->
+        <!--            android:text="Delete"-->
+        <!--            android:textAllCaps="false"-->
+        <!--            android:textColor="@color/white" />-->
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

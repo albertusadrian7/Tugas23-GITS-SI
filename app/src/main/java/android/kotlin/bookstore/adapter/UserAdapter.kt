@@ -1,12 +1,12 @@
-package android.kotlin.bookstore
+package android.kotlin.bookstore.adapter
 
+import android.kotlin.bookstore.R
 import android.kotlin.bookstore.model.UserItem
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
@@ -21,23 +21,14 @@ class UserAdapter(val listUser: ArrayList<UserItem>): RecyclerView.Adapter<UserA
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: UserAdapter.ViewHolder, position: Int) {
-        val data = listUser[position]
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val user = listUser[position]
         val IMAGE_BASE = "http://192.168.43.84/bukurestapi/user_img/"
-        holder.nama.text = data.nama.toString()
-        holder.username.text = data.username.toString()
-        holder.email.text = data.email.toString()
-        holder.alamat.text = data.alamat.toString()
-        Glide.with(holder.itemView).load(IMAGE_BASE + data.gambar).into(holder.gambarUser)
-//        holder.pilihBuku.setOnClickListener{
-//            val intent = Intent(holder.itemView.context, EditBukuActivity::class.java)
-//            intent.putExtra("idBuku", data.id.toString())
-//            intent.putExtra("judulBuku", data.judul.toString())
-//            intent.putExtra("penulis", data.penulis.toString())
-//            intent.putExtra("rating", data.rating.toString())
-//            intent.putExtra("harga", data.harga.toString())
-//            holder.itemView.context.startActivity(intent)
-//        }
+        holder.nama.text = user.nama.toString()
+        holder.username.text = "@${user.username}"
+        holder.email.text = user.email.toString()
+        holder.alamat.text = user.alamat.toString()
+        Glide.with(holder.itemView).load(IMAGE_BASE + user.gambar).into(holder.gambarUser)
     }
 
     override fun getItemCount(): Int = listUser.size

@@ -19,7 +19,7 @@ class TambahBukuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_tambah_buku)
         btnTambah.setOnClickListener {
             RetrofitClient.instance.insertBuku(
-                inputId.text.toString().trim(),
+                "",
                 inputJudul.text.toString().trim(),
                 inputPenulis.text.toString().trim(),
                 inputRating.text.toString().trim(),
@@ -32,23 +32,19 @@ class TambahBukuActivity : AppCompatActivity() {
                 ) {
                     if (response!!.isSuccessful){
                         if (response.body()?.status == 1){
-                            inputId.setText("")
                             inputJudul.setText("")
                             inputPenulis.setText("")
                             inputRating.setText("")
                             inputHarga.setText("")
-                            val toast = Toast.makeText(this@TambahBukuActivity, "Berhasil menambah buku!", Toast.LENGTH_SHORT)
-                            toast.show()
+                            Toast.makeText(this@TambahBukuActivity, "Berhasil menambah buku!", Toast.LENGTH_SHORT).show()
                             finish()
                         }
                     } else {
-                        val toast = Toast.makeText(this@TambahBukuActivity, "Gagal menambah buku", Toast.LENGTH_SHORT)
-                        toast.show()
+                        Toast.makeText(this@TambahBukuActivity, "Gagal menambah buku", Toast.LENGTH_SHORT).show()
                     }
                 }
                 override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                    val toast = Toast.makeText(this@TambahBukuActivity, "Tidak ada respon $t", Toast.LENGTH_SHORT)
-                    toast.show()
+                    Toast.makeText(this@TambahBukuActivity, "Tidak ada respon $t", Toast.LENGTH_SHORT).show()
                 }
             })
         }

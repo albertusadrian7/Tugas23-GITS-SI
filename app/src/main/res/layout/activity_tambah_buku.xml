@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
+    android:background="@color/sky_blue"
     tools:context=".TambahBukuActivity">
     <TextView
         android:layout_width="wrap_content"
@@ -19,51 +20,97 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:orientation="vertical"
-        android:background="@color/white"
+        android:paddingVertical="30dp"
+        android:paddingHorizontal="20dp"
+        android:background="@drawable/card_box"
         >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID Buku"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/dark_blue"
+            android:textSize="14sp"
+            />
         <EditText
             android:id="@+id/inputId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Masukkan Id"
-            android:layout_marginVertical="5dp"
-            android:inputType="textPersonName"
+            android:hint="Masukkan id"
+            android:textSize="14sp"
+            android:inputType="number"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Judul Buku"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/dark_blue"
+            android:textSize="14sp"
+            />
+
         <EditText
             android:id="@+id/inputJudul"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:layout_marginVertical="5dp"
+            android:textSize="14sp"
             android:inputType="textPersonName"
             android:hint="Judul Buku" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Penulis Buku"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/dark_blue"
+            android:layout_marginTop="20dp"
+            android:textSize="14sp"
+            />
         <EditText
             android:id="@+id/inputPenulis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:layout_marginVertical="5dp"
+            android:textSize="14sp"
             android:inputType="textPersonName"
             android:hint="Penulis Buku" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rating Buku"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/dark_blue"
+            android:layout_marginTop="20dp"
+            android:textSize="14sp"
+            />
         <EditText
             android:id="@+id/inputRating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:layout_marginVertical="5dp"
-            android:inputType="textPersonName"
+            android:textSize="14sp"
+            android:inputType="numberDecimal"
             android:hint="Rating Buku" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Harga Buku"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/dark_blue"
+            android:textSize="14sp"
+            />
         <EditText
             android:id="@+id/inputHarga"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:layout_marginVertical="5dp"
-            android:inputType="textPersonName"
+            android:textSize="14sp"
+            android:inputType="number"
             android:hint="Harga" />
     </LinearLayout>
     <Button
@@ -71,10 +118,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Simpan Buku"
+        android:padding="10dp"
         android:backgroundTint="@color/dark_blue"
         android:textColor="@color/white"
         android:layout_marginTop="50dp"
         android:layout_gravity="center"
         android:textAllCaps="false"
+        android:background="@drawable/custom_button"
         />
 </LinearLayout>

@@ -1,119 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_buku"
     android:layout_marginVertical="10dp"
-    app:cardElevation="10dp"
     app:cardCornerRadius="10dp"
-    app:cardBackgroundColor="@color/white">
-    <RelativeLayout
+    app:cardBackgroundColor="@color/white"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:gravity="center_vertical"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/teksJudul"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="5dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:textColor="@color/dark_blue"
-                    android:textSize="12sp"
-                    android:text="Judul: " />
-                <TextView
-                    android:id="@+id/judulBuku"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/dark_blue"
-                    android:fontFamily="@font/poppins"
-                    android:text="Text Judul"
-                    android:textSize="12sp"
-                    android:paddingEnd="10dp"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Penulis: "
-                    android:textSize="12sp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:textColor="@color/dark_blue"
-                    />
-                <TextView
-                    android:id="@+id/penulis"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Text Penulis"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@color/dark_blue"
-                    android:paddingEnd="10dp"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Harga: "
-                    android:textColor="@color/dark_blue"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:textSize="12sp"
-                    />
-                <TextView
-                    android:id="@+id/harga"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Text harga"
-                    android:fontFamily="@font/poppins"
-                    android:textSize="12sp"
-                    android:paddingEnd="10dp"
-                    />
-            </LinearLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <RatingBar
-                    android:id="@+id/ratingBuku"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="100dp"
-                    style="@style/Widget.AppCompat.RatingBar.Small"
-                    android:theme="@style/Widget.AppCompat.RatingBar.Small"/>
-                <Button
-                    android:id="@+id/btnDelete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Delete"
-                    android:textAllCaps="false"
-                    android:layout_toEndOf="@id/ratingBuku"
-                    android:backgroundTint="@color/dark_blue"
-                    android:textColor="@color/white"
-                    />
-            </RelativeLayout>
-        </LinearLayout>
-    </RelativeLayout>
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Judul: "
+            android:textColor="@color/dark_blue"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/judulBuku"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins"
+            android:text="Text Judul"
+            android:textColor="@color/dark_blue"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/teksJudul"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/teksPenulis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Penulis: "
+            android:textColor="@color/dark_blue"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/judulBuku" />
+
+        <TextView
+            android:id="@+id/penulis"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins"
+            android:text="Text penulis"
+            android:textColor="@color/dark_blue"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/teksPenulis"
+            app:layout_constraintTop_toBottomOf="@+id/judulBuku" />
+
+        <TextView
+            android:id="@+id/teksHarga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Harga: "
+            android:textColor="@color/dark_blue"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/penulis" />
+
+        <TextView
+            android:id="@+id/harga"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins"
+            android:text="Text harga"
+            android:textColor="@color/dark_blue"
+            android:textSize="14sp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/teksHarga"
+            app:layout_constraintTop_toBottomOf="@+id/penulis" />
+
+        <RatingBar
+            android:id="@+id/ratingBuku"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:theme="@style/RatingBar"
+            app:layout_constraintEnd_toEndOf="@+id/btnDelete"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/harga" />
+
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Delete"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="12sp"
+            android:background="@drawable/custom_button"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.857"
+            app:layout_constraintStart_toEndOf="@id/ratingBuku"
+            app:layout_constraintTop_toTopOf="@id/ratingBuku" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.cardview.widget.CardView>

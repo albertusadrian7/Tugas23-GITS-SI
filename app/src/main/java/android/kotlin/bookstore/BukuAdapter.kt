@@ -1,10 +1,12 @@
 package android.kotlin.bookstore
 
 import android.content.Intent
+import android.kotlin.bookstore.model.BukuResponse
 import android.kotlin.bookstore.model.DataItem
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
@@ -12,7 +14,10 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class BukuAdapter(private val listBuku: ArrayList<DataItem>): RecyclerView.Adapter<BukuAdapter.ViewHolder>(){
+class BukuAdapter(
+    val listBuku: ArrayList<DataItem>,
+    val listener: OnAdapterListener
+): RecyclerView.Adapter<BukuAdapter.ViewHolder>(){
     fun setData(data : List<DataItem>){
         listBuku.clear()
         listBuku.addAll(data)
@@ -24,6 +29,7 @@ class BukuAdapter(private val listBuku: ArrayList<DataItem>): RecyclerView.Adapt
         var ratingBar: RatingBar = itemView.findViewById(R.id.ratingBuku)
         var harga: TextView = itemView.findViewById(R.id.harga)
         var pilihBuku: CardView = itemView.findViewById(R.id.card_buku)
+        var btnDelete: Button = itemView.findViewById(R.id.btnDelete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -42,15 +48,21 @@ class BukuAdapter(private val listBuku: ArrayList<DataItem>): RecyclerView.Adapt
         }
         holder.pilihBuku.setOnClickListener{
             val intent = Intent(holder.itemView.context, EditBukuActivity::class.java)
-            intent.putExtra("idBuku", data.id)
-            intent.putExtra("judulBuku", data.judul)
-            intent.putExtra("penulis", data.penulis)
-            intent.putExtra("rating", data.rating)
-            intent.putExtra("harga", data.harga)
+            intent.putExtra("idBuku", data.id.toString())
+            intent.putExtra("judulBuku", data.judul.toString())
+            intent.putExtra("penulis", data.penulis.toString())
+            intent.putExtra("rating", data.rating.toString())
+            intent.putExtra("harga", data.harga.toString())
             holder.itemView.context.startActivity(intent)
+        }
+        holder.btnDelete.setOnClickListener {
+            listener.onDeleteBuku(data.id.toString())
         }
     }
 
     override fun getItemCount(): Int = listBuku.size
 
+    interface OnAdapterListener {
+        fun onDeleteBuku(idBuku: String)
+    }
 }

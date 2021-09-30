@@ -37,16 +37,17 @@ class TambahBukuActivity : AppCompatActivity() {
                             inputPenulis.setText("")
                             inputRating.setText("")
                             inputHarga.setText("")
-                            val toast = Toast.makeText(this@TambahBukuActivity, "Berhasil menambah buku!", Toast.LENGTH_LONG)
+                            val toast = Toast.makeText(this@TambahBukuActivity, "Berhasil menambah buku!", Toast.LENGTH_SHORT)
                             toast.show()
+                            finish()
                         }
                     } else {
-                        val toast = Toast.makeText(this@TambahBukuActivity, "Gagal menambah buku", Toast.LENGTH_LONG)
+                        val toast = Toast.makeText(this@TambahBukuActivity, "Gagal menambah buku", Toast.LENGTH_SHORT)
                         toast.show()
                     }
                 }
                 override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                    val toast = Toast.makeText(this@TambahBukuActivity, "Tidak ada respon $t", Toast.LENGTH_LONG)
+                    val toast = Toast.makeText(this@TambahBukuActivity, "Tidak ada respon $t", Toast.LENGTH_SHORT)
                     toast.show()
                 }
             })

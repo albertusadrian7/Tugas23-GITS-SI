@@ -13,39 +13,72 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_edit_buku.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.btnTambah
+import kotlinx.android.synthetic.main.activity_tambah_buku.*
 import kotlinx.android.synthetic.main.card_buku.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
-    val bukuAdapter = BukuAdapter(arrayListOf())
+    private val api by lazy { RetrofitClient.instance }
+    val bukuAdapter = BukuAdapter(arrayListOf(), object : BukuAdapter.OnAdapterListener{
+        override fun onDeleteBuku(idBuku: String) {
+            api.deleteBuku(idBuku,"delete_buku")
+                .enqueue(object : Callback<DefaultResponse>{
+                    override fun onResponse(
+                        call: Call<DefaultResponse>,
+                        response: Response<DefaultResponse>
+                    ) {
+                        if (response!!.isSuccessful){
+                            if (response.body()?.status == 1){
+                                val toast = Toast.makeText(this@MainActivity, "Berhasil delete buku!", Toast.LENGTH_SHORT)
+                                toast.show()
+                                getBukuData()
+                            }
+                        } else {
+                            val toast = Toast.makeText(this@MainActivity, "Gagal delete buku", Toast.LENGTH_SHORT)
+                            toast.show()
+                        }
+                    }
+                    override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                        val toast = Toast.makeText(this@MainActivity, "Tidak ada respon $t", Toast.LENGTH_SHORT)
+                        toast.show()
+                    }
+                })
+        }
+    })
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recyclerBuku.layoutManager = LinearLayoutManager(this)
-        getBukuData()
+        recyclerBuku.adapter = bukuAdapter
+        onStart()
         btnTambah.setOnClickListener{
             val intent = Intent(this, TambahBukuActivity::class.java)
             startActivity(intent)
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        getBukuData()
+    }
+
     private fun getBukuData(){
-        RetrofitClient.instance.getBukuList("get_buku").enqueue(object: Callback<BukuResponse> {
+        api.getBukuList("get_buku").enqueue(object: Callback<BukuResponse> {
             override fun onResponse(call: Call<BukuResponse>?, response: Response<BukuResponse>?) {
-                recyclerBuku.adapter = BukuAdapter(response?.body()?.data as ArrayList<DataItem>)
+//                recyclerBuku.adapter = BukuAdapter(response?.body()?.data as ArrayList<DataItem>)
                 if (response!!.isSuccessful){
                     response.body()?.let { tampilBuku(it) }
-                    val toast = Toast.makeText(this@MainActivity, "Daftar Buku", Toast.LENGTH_LONG)
-                    toast.show()
+                    Toast.makeText(this@MainActivity, "Daftar Buku", Toast.LENGTH_LONG).show()
                 } else {
-                    val toast = Toast.makeText(this@MainActivity, "Gagal memberikan response", Toast.LENGTH_LONG)
-                    toast.show()
+                    Toast.makeText(this@MainActivity, "Gagal mendapatkan daftar buku", Toast.LENGTH_LONG).show()
                 }
             }
             override fun onFailure(call: Call<BukuResponse>?, t: Throwable?) {
-                val toast = Toast.makeText(this@MainActivity, "Tidak ada respon $t", Toast.LENGTH_LONG)
-                toast.show()
+                Toast.makeText(this@MainActivity, "Tidak ada respon $t", Toast.LENGTH_LONG).show()
             }
         })
     }
@@ -54,6 +87,5 @@ class MainActivity : AppCompatActivity() {
         val result = dataBuku.data
         bukuAdapter.setData(result as List<DataItem>)
     }
-
 
 }

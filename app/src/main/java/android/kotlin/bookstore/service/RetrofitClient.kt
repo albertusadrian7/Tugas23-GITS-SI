@@ -1,11 +1,15 @@
 package android.kotlin.bookstore.service
 
+import android.net.Uri
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.net.URI
+import com.google.gson.GsonBuilder
+
+import com.google.gson.Gson
 
 object RetrofitClient {
-
     private const val BASE_URL = "http://192.168.43.84/bukurestapi/"
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->

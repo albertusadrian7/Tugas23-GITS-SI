@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/card_buku"
+    android:id="@+id/card_user"
     android:layout_marginVertical="10dp"
     app:cardCornerRadius="10dp"
     app:cardBackgroundColor="@color/white"
@@ -81,12 +81,24 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             android:src="@drawable/user"
             app:layout_constraintBottom_toBottomOf="@+id/alamat"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/nama"
             app:shapeAppearanceOverlay="@style/roundSquare" />
+
+        <Button
+            android:id="@+id/btnDeleteUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_button"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/alamat" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

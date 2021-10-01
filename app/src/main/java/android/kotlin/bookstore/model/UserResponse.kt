@@ -20,6 +20,9 @@ data class UserResponse(
 @Parcelize
 data class UserItem(
 
+	@field:SerializedName("password")
+	val password: String? = null,
+
 	@field:SerializedName("nama")
 	val nama: String? = null,
 

@@ -10,7 +10,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.Gson
 
 object RetrofitClient {
-    private const val BASE_URL = "http://192.168.43.84/bukurestapi/"
+    private const val BASE_URL = "http://192.168.43.84/bukuRestApi/"
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->
             val original = chain.request()
@@ -30,9 +30,12 @@ object RetrofitClient {
     }
 
     val instanceUser: UserApiInterface by lazy{
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient)
             .build()
         retrofit.create(UserApiInterface::class.java)

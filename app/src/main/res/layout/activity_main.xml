@@ -9,35 +9,45 @@
     android:paddingHorizontal="15dp"
     android:background="@color/sky_blue"
     tools:context=".MainActivity">
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:textColor="@color/dark_blue"
-            android:textStyle="bold"
             android:layout_weight="4"
-            android:text="Daftar Buku" />
+            android:text="Daftar Buku"
+            android:textColor="@color/dark_blue"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <Button
             android:id="@+id/btnTambah"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_button"
-            android:textColor="@color/white"
             android:fontFamily="@font/poppins_semibold"
-            android:textSize="12sp"
-            android:layout_weight="1"
+            android:padding="10dp"
+            android:text="Tambah Buku"
             android:textAllCaps="false"
-            android:text="Tambah Buku"/>
-    </LinearLayout>
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerBuku"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:clipToPadding="false"
         tools:listitem="@layout/card_buku"/>
 </LinearLayout>

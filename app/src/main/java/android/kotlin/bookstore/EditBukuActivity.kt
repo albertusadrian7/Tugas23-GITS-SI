@@ -16,14 +16,13 @@ class EditBukuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_buku)
-        inputEditId.setText(intent.getStringExtra("idBuku"))
         inputEditJudul.setText(intent.getStringExtra("judulBuku"))
         inputEditHarga.setText(intent.getStringExtra("penulis"))
         inputEditPenulis.setText(intent.getStringExtra("rating"))
         inputEditRating.setText(intent.getStringExtra("harga"))
         btnEdit.setOnClickListener {
             api.updateBuku(
-                inputEditId.text.toString(),
+                "",
                 inputEditJudul.text.toString(),
                 inputEditPenulis.text.toString(),
                 inputEditRating.text.toString(),

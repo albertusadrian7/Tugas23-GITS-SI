@@ -16,6 +16,12 @@
         android:theme="@style/Theme.BookStore"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".UserActivity"
+            android:exported="true" />
+        <activity
+            android:name=".EditUserActivity"
+            android:exported="true" />
+        <activity
             android:name=".DashboardActivity"
             android:exported="true" />
         <activity
@@ -31,7 +37,7 @@
             android:name=".TambahBukuActivity"
             android:exported="true" />
         <activity
-            android:name=".UserActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

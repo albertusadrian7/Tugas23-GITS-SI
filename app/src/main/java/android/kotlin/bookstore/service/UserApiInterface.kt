@@ -16,10 +16,38 @@ interface UserApiInterface {
     fun insertPengguna(
         @Field("id_user") idUser: String,
         @Field("username") username: String,
+        @Field("password") password: String,
         @Field("email") email: String,
         @Field("nama") nama: String,
         @Field("alamat") alamat: String,
         @Field("gambar") gambar: String,
+        @Query("function") function: String
+    ): Call<DefaultResponse>
+
+    @FormUrlEncoded
+    @POST("penggunaApi.php")
+    fun updateUser(
+        @Field("id_user") idUser: String,
+        @Field("username") username: String,
+        @Field("password") password: String,
+        @Field("email") email: String,
+        @Field("nama") nama: String,
+        @Field("alamat") alamat: String,
+        @Field("gambar") gambar: String,
+        @Query("function") function: String
+    ): Call<DefaultResponse>
+
+    @FormUrlEncoded
+    @POST("penggunaApi.php?function=login_pengguna")
+    fun loginPengguna(
+        @Field("username") username: String,
+        @Field("password") password: String
+    ): Call<UserResponse>
+
+    @FormUrlEncoded
+    @POST("penggunaApi.php")
+    fun deleteUser(
+        @Field("id_user") idUser: String,
         @Query("function") function: String
     ): Call<DefaultResponse>
 

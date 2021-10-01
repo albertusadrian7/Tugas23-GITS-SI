@@ -37,6 +37,13 @@ class TambahUserActivity : AppCompatActivity() {
         btnUploadGambar.setOnClickListener {
             pilihGambar()
         }
+        btnTambahUser.setOnClickListener {
+            if (imageUri == null ){
+                insertUser()
+            } else {
+                insertUserWithImage(imageUri!!)
+            }
+        }
     }
 
     private fun pilihGambar(){
@@ -53,9 +60,6 @@ class TambahUserActivity : AppCompatActivity() {
                 REQUEST_CODE_IMAGE_PICKER ->{
                     imageUri = data?.data
                     userViewImg.setImageURI(imageUri)
-                    btnTambahUser.setOnClickListener {
-                        insertUser(imageUri!!)
-                    }
                 }
             }
         }
@@ -82,7 +86,7 @@ class TambahUserActivity : AppCompatActivity() {
     }
 
     // Function untuk upload gambar ke server dan insert pengguna ke database
-    private fun insertUser(contentURI: Uri) {
+    private fun insertUserWithImage(contentURI: Uri) {
         // Upload gambar ke server
         val filePath = getPathFromURI(this, contentURI)
         val file = File(filePath)
@@ -101,6 +105,7 @@ class TambahUserActivity : AppCompatActivity() {
                         RetrofitClient.instanceUser.insertPengguna(
                             "",
                             inputUsername.text.toString().trim(),
+                            inputPassword.text.toString().trim(),
                             inputEmail.text.toString().trim(),
                             inputNama.text.toString().trim(),
                             inputAlamat.text.toString().trim(),
@@ -117,6 +122,7 @@ class TambahUserActivity : AppCompatActivity() {
                                         inputAlamat.setText("")
                                         inputEmail.setText("")
                                         inputUsername.setText("")
+                                        inputPassword.setText("")
                                         Toast.makeText(this@TambahUserActivity, "Berhasil menambah user!", Toast.LENGTH_SHORT).show()
                                         finish()
                                     }
@@ -128,14 +134,49 @@ class TambahUserActivity : AppCompatActivity() {
                                 Toast.makeText(this@TambahUserActivity, "Tidak ada respon $t", Toast.LENGTH_SHORT).show()
                             }
                         })
-                        val toast = Toast.makeText(this@TambahUserActivity, "Berhasil upload foto!", Toast.LENGTH_SHORT)
-                        toast.show()
+                        Toast.makeText(this@TambahUserActivity, "Berhasil upload foto!", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     Toast.makeText(this@TambahUserActivity, "Gagal upload foto!", Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<UploadGambarResponse>, t: Throwable) {
+                Toast.makeText(this@TambahUserActivity, "Tidak ada respon $t", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun insertUser(){
+        // Insert pengguna ke dalam database
+        RetrofitClient.instanceUser.insertPengguna(
+            "",
+            inputUsername.text.toString().trim(),
+            inputPassword.text.toString().trim(),
+            inputEmail.text.toString().trim(),
+            inputNama.text.toString().trim(),
+            inputAlamat.text.toString().trim(),
+            "user.png",
+            "insert_pengguna"
+        ).enqueue(object : Callback<DefaultResponse> {
+            override fun onResponse(
+                call: Call<DefaultResponse>,
+                response: Response<DefaultResponse>
+            ) {
+                if (response!!.isSuccessful){
+                    if (response.body()?.status == 1){
+                        inputNama.setText("")
+                        inputAlamat.setText("")
+                        inputEmail.setText("")
+                        inputUsername.setText("")
+                        inputPassword.setText("")
+                        Toast.makeText(this@TambahUserActivity, "Berhasil menambah user!", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                } else {
+                    Toast.makeText(this@TambahUserActivity, "Gagal menambah user!", Toast.LENGTH_SHORT).show()
+                }
+            }
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
                 Toast.makeText(this@TambahUserActivity, "Tidak ada respon $t", Toast.LENGTH_SHORT).show()
             }
         })

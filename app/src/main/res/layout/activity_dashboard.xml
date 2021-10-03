@@ -11,159 +11,204 @@
 
     <TextView
         android:id="@+id/dashboard"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
         android:text="Dashboard"
         android:textColor="@color/dark_blue"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/namaUser" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/vw_imgUser"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
         android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/circular"
         android:src="@drawable/user"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dashboard" />
 
-    <TextView
-        android:id="@+id/namaUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hi, nama"
-        android:textColor="@color/dark_blue"
-        android:fontFamily="@font/poppins_bold"
-        android:textSize="16sp"
-        />
-
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/card_box"
-        android:orientation="vertical"
-        android:layout_marginTop="40dp"
-        android:padding="30dp"
+        android:padding="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/logout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.016"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vw_imgUser">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="Username: "
-            android:textSize="14sp"
+            android:text="Username"
             android:textColor="@color/dark_blue"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="10dp" />
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/colon1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=": "
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/vw_username"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:fontFamily="@font/poppins_bold"
+            android:fontFamily="@font/poppins_semibold"
             android:text="Teks Username"
-            android:textSize="14sp"
-            android:layout_marginBottom="5dp"
             android:textColor="@color/dark_blue"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintStart_toEndOf="@+id/colon1"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="Email: "
-            android:textSize="14sp"
+            android:text="Email"
             android:textColor="@color/dark_blue"
-            app:layout_constraintTop_toBottomOf="@+id/vw_username"
-            tools:layout_editor_absoluteX="10dp" />
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vw_username" />
+
+        <TextView
+            android:id="@+id/colon2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=": "
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/vw_username" />
 
         <TextView
             android:id="@+id/vw_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Teks Email"
             android:layout_marginBottom="5dp"
-            android:layout_marginStart="5dp"
-            android:textSize="14sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Teks Email"
             android:textColor="@color/dark_blue"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintStart_toEndOf="@+id/colon2"
             app:layout_constraintTop_toBottomOf="@+id/vw_username" />
 
         <TextView
             android:id="@+id/textView5"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="Alamat: "
-            android:textSize="14sp"
+            android:text="Alamat"
             android:textColor="@color/dark_blue"
-            app:layout_constraintTop_toBottomOf="@+id/vw_email"
-            tools:layout_editor_absoluteX="10dp" />
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vw_email" />
+
+        <TextView
+            android:id="@+id/colon3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=": "
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/vw_email" />
 
         <TextView
             android:id="@+id/vw_alamat"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:fontFamily="@font/poppins_bold"
             android:layout_marginBottom="5dp"
+            android:fontFamily="@font/poppins_semibold"
             android:text="Teks Alamat"
-            android:textSize="14sp"
             android:textColor="@color/dark_blue"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintStart_toEndOf="@+id/colon3"
             app:layout_constraintTop_toBottomOf="@+id/vw_email" />
 
-        <Button
-            android:id="@+id/daftarUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_button"
-            android:drawableLeft="@drawable/ic_list_bulleted"
-            android:drawablePadding="5dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:padding="10dp"
-            android:text="Daftar User"
-            android:layout_marginTop="20dp"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/daftarBuku" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Hello,"
+        android:textColor="@color/dark_blue"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vw_imgUser" />
+
+    <TextView
+        android:id="@+id/namaUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Teks Nama"
+        android:textSize="28sp"
+        android:textColor="@color/dark_blue"
+        android:fontFamily="@font/poppins_semibold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hello" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/card_box"
+        app:layout_constraintTop_toBottomOf="@+id/namaUser"
+        tools:layout_editor_absoluteX="1dp">
 
         <Button
             android:id="@+id/daftarBuku"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/custom_button_2"
-            android:drawableLeft="@drawable/ic_baseline_list_black"
-            android:drawablePadding="5dp"
+            android:background="@drawable/custom_button_white"
             android:fontFamily="@font/poppins_semibold"
+            android:drawableLeft="@drawable/btn_book_list"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
             android:padding="10dp"
             android:text="Daftar Buku"
+            android:textSize="14sp"
             android:textAllCaps="false"
             android:textColor="@color/dark_blue"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vw_alamat" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/daftarUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_button_white"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/btn_user_list"
+            android:drawablePadding="20dp"
+            android:padding="10dp"
+            android:text="Daftar User"
+            android:textAllCaps="false"
+            android:textColor="@color/dark_blue"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/daftarBuku"
+            tools:layout_editor_absoluteX="49dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -171,16 +216,21 @@
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/custom_button"
-        android:drawableLeft="@drawable/ic_logout"
-        android:drawablePadding="5dp"
         android:fontFamily="@font/poppins_semibold"
-        android:padding="10dp"
-        android:text="Logout"
+        android:gravity="center_vertical"
+        android:paddingVertical="15dp"
+        android:paddingHorizontal="20dp"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/ic_logout"
+        android:text="@string/logout"
         android:textAllCaps="false"
         android:textColor="@color/white"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="49dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,7 +41,7 @@ class BukuAdapter(
         val rating = data.rating
         holder.judulBuku.text = data.judul.toString()
         holder.penulis.text = data.penulis.toString()
-        holder.harga.text = data.harga.toString()
+        holder.harga.text = "Rp "+data.harga.toString()
         if (rating != null) {
             holder.ratingBar.rating = rating.toFloat()
         }

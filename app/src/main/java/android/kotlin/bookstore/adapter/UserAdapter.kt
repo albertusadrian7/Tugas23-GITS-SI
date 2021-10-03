@@ -4,6 +4,7 @@ import android.content.Intent
 import android.kotlin.bookstore.EditUserActivity
 import android.kotlin.bookstore.R
 import android.kotlin.bookstore.model.UserItem
+import android.kotlin.bookstore.service.RetrofitClient
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,13 +18,15 @@ import com.bumptech.glide.request.RequestOptions
 
 class UserAdapter(
     val listUser: ArrayList<UserItem>,
-    val listener: UserAdapter.OnAdapterListener
+    val listener: OnAdapterListener
 ): RecyclerView.Adapter<UserAdapter.ViewHolder>() {
+    private val IMAGE_BASE = RetrofitClient.BASE_URL + "user_img/"
     fun setData(data : List<UserItem>){
         listUser.clear()
         listUser.addAll(data)
         notifyDataSetChanged()
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.card_user, parent, false)
         return ViewHolder(view)
@@ -31,13 +34,12 @@ class UserAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val user = listUser[position]
-        val IMAGE_BASE = "http://192.168.43.84/bukurestapi/user_img/"
         val pathGambar = IMAGE_BASE + user.gambar
         holder.nama.text = user.nama.toString()
         holder.username.text = "@${user.username}"
         holder.email.text = user.email.toString()
         holder.alamat.text = user.alamat.toString()
-        Glide.with(holder.itemView).load(pathGambar).apply(RequestOptions().override(75,75)).into(holder.gambarUser)
+        Glide.with(holder.itemView).load(pathGambar).into(holder.gambarUser)
         holder.pilihUser.setOnClickListener{
             val intent = Intent(holder.itemView.context, EditUserActivity::class.java)
             intent.putExtra("idUser", user.idUser.toString())

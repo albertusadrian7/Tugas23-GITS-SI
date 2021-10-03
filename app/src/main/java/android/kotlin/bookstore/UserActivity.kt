@@ -67,7 +67,7 @@ class UserActivity : AppCompatActivity() {
             override fun onResponse(call: Call<UserResponse>?, response: Response<UserResponse>?) {
                 if (response!!.isSuccessful){
                     response.body()?.let { tampilUser(it) }
-                    Toast.makeText(this@UserActivity, "Daftar User", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@UserActivity, "Daftar User", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this@UserActivity, "Gagal mendapatkan daftar user", Toast.LENGTH_LONG).show()
                 }

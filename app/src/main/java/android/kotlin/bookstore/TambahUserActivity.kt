@@ -27,9 +27,11 @@ import java.io.File
 import okhttp3.MultipartBody
 import okhttp3.MultipartBody.Part.Companion.createFormData
 import okhttp3.RequestBody
+import pub.devrel.easypermissions.EasyPermissions
 
 class TambahUserActivity : AppCompatActivity() {
     private var imageUri: Uri? = null
+    private var imageName: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,18 +40,22 @@ class TambahUserActivity : AppCompatActivity() {
             pilihGambar()
         }
         btnTambahUser.setOnClickListener {
-            if (imageUri == null ){
-                insertUser()
-            } else {
-                insertUserWithImage(imageUri!!)
-            }
+            insertUserWithImage(imageUri)
         }
     }
 
     private fun pilihGambar(){
-        Intent(Intent.ACTION_PICK).also{
-            it.type = "image/*"
-            startActivityForResult(it, REQUEST_CODE_IMAGE_PICKER)
+        if(EasyPermissions.hasPermissions(this,android.Manifest.permission.READ_EXTERNAL_STORAGE)){
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, REQUEST_CODE_IMAGE_PICKER)
+        }else{
+            // Menampilkan permission request saat belum mendapat permission dari user
+            EasyPermissions.requestPermissions(
+                this,
+                "This application need your permission to access photo gallery.",
+                991,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE)
         }
     }
 
@@ -71,79 +77,55 @@ class TambahUserActivity : AppCompatActivity() {
 
     private fun getPathFromURI(context: Context, contentUri: Uri): String {
         var cursor: Cursor? = null
-        try {
+        return try {
             val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
             cursor = context.contentResolver.query(contentUri, filePathColumn, null, null, null)
             val column_index = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
             cursor.moveToFirst()
-            return cursor.getString(column_index)
+            cursor.getString(column_index)
         } catch (e: Exception) {
             Log.e(TAG, "getPathFromURI Exception : ${e.toString()}")
-            return ""
+            ""
         } finally {
             cursor?.close()
         }
     }
 
     // Function untuk upload gambar ke server dan insert pengguna ke database
-    private fun insertUserWithImage(contentURI: Uri) {
-        // Upload gambar ke server
-        val filePath = getPathFromURI(this, contentURI)
-        val file = File(filePath)
-        val mFile = RequestBody.create("multipart".toMediaTypeOrNull(), file)
-        val body: MultipartBody.Part = createFormData("file", file.name, mFile)
-        RetrofitImage().getService().uploadGambar(
-            body
-        ).enqueue(object: Callback<UploadGambarResponse> {
-            override fun onResponse(
-                call: Call<UploadGambarResponse>?,
-                response: Response<UploadGambarResponse>?
-            ) {
-                if (response!!.isSuccessful){
-                    if (response.body()?.status == 1){
-                        // Insert pengguna ke dalam database
-                        RetrofitClient.instanceUser.insertPengguna(
-                            "",
-                            inputUsername.text.toString().trim(),
-                            inputPassword.text.toString().trim(),
-                            inputEmail.text.toString().trim(),
-                            inputNama.text.toString().trim(),
-                            inputAlamat.text.toString().trim(),
-                            file.name.toString().trim(),
-                            "insert_pengguna"
-                        ).enqueue(object : Callback<DefaultResponse> {
-                            override fun onResponse(
-                                call: Call<DefaultResponse>,
-                                response: Response<DefaultResponse>
-                            ) {
-                                if (response!!.isSuccessful){
-                                    if (response.body()?.status == 1){
-                                        inputNama.setText("")
-                                        inputAlamat.setText("")
-                                        inputEmail.setText("")
-                                        inputUsername.setText("")
-                                        inputPassword.setText("")
-                                        Toast.makeText(this@TambahUserActivity, "Berhasil menambah user!", Toast.LENGTH_SHORT).show()
-                                        finish()
-                                    }
-                                } else {
-                                    Toast.makeText(this@TambahUserActivity, "Gagal menambah user!", Toast.LENGTH_SHORT).show()
-                                }
-                            }
-                            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                                Toast.makeText(this@TambahUserActivity, "Tidak ada respon $t", Toast.LENGTH_SHORT).show()
-                            }
-                        })
-                        Toast.makeText(this@TambahUserActivity, "Berhasil upload foto!", Toast.LENGTH_SHORT).show()
+    private fun insertUserWithImage(imageUri: Uri?) {
+        // Jika pengguna belum upload gambar, maka aplikasi akan menampilkan pesan
+        if (imageUri == null){
+            imageName = "user.png"
+            insertUser()
+        } else {
+            // Upload gambar ke server
+            val filePath = getPathFromURI(this, imageUri)
+            val file = File(filePath)
+            val mFile = RequestBody.create("multipart".toMediaTypeOrNull(), file)
+            imageName = file.name
+            val body: MultipartBody.Part = createFormData("file", imageName, mFile)
+            RetrofitImage().getService().uploadGambar(
+                body
+            ).enqueue(object: Callback<UploadGambarResponse> {
+                override fun onResponse(
+                    call: Call<UploadGambarResponse>?,
+                    response: Response<UploadGambarResponse>?
+                ) {
+                    if (response!!.isSuccessful){
+                        if (response.body()?.status == 1){
+                            Toast.makeText(this@TambahUserActivity, "Berhasil upload foto!", Toast.LENGTH_SHORT).show()
+                            insertUser()
+                        }
+                    } else {
+                        Toast.makeText(this@TambahUserActivity, "Gagal upload foto!", Toast.LENGTH_SHORT).show()
                     }
-                } else {
-                    Toast.makeText(this@TambahUserActivity, "Gagal upload foto!", Toast.LENGTH_SHORT).show()
                 }
-            }
-            override fun onFailure(call: Call<UploadGambarResponse>, t: Throwable) {
-                Toast.makeText(this@TambahUserActivity, "Tidak ada respon $t", Toast.LENGTH_SHORT).show()
-            }
-        })
+                override fun onFailure(call: Call<UploadGambarResponse>, t: Throwable) {
+                    Toast.makeText(this@TambahUserActivity, "Tidak ada respon $t", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+
     }
 
     private fun insertUser(){
@@ -155,7 +137,7 @@ class TambahUserActivity : AppCompatActivity() {
             inputEmail.text.toString().trim(),
             inputNama.text.toString().trim(),
             inputAlamat.text.toString().trim(),
-            "user.png",
+            imageName.trim(),
             "insert_pengguna"
         ).enqueue(object : Callback<DefaultResponse> {
             override fun onResponse(
@@ -181,4 +163,5 @@ class TambahUserActivity : AppCompatActivity() {
             }
         })
     }
+
 }

@@ -3,6 +3,7 @@ package android.kotlin.bookstore
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.kotlin.bookstore.service.RetrofitClient
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -17,8 +18,7 @@ class DashboardActivity : AppCompatActivity() {
     val KEY_ALAMAT = "key.alamat"
     val KEY_EMAIL = "key.email"
     val KEY_GAMBAR = "key.gambar"
-    val KEY_LOGIN = "key.login"
-    val IMAGE_BASE = "http://192.168.43.84/bukurestapi/user_img/"
+    val IMAGE_BASE = RetrofitClient.BASE_URL + "user_img/"
 
     lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +31,7 @@ class DashboardActivity : AppCompatActivity() {
         val email = sharedPreferences.getString(KEY_EMAIL,"")
         val gambar = sharedPreferences.getString(KEY_GAMBAR,"")
         val pathGambar = IMAGE_BASE + gambar
-        namaUser.setText("Hi, ${nama}")
+        namaUser.setText(nama)
         vw_username.setText(username)
         vw_alamat.setText(alamat)
         vw_email.setText(email)

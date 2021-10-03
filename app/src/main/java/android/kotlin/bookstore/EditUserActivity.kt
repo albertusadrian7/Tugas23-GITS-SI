@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_tambah_user.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import pub.devrel.easypermissions.EasyPermissions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,13 +30,14 @@ import java.io.File
 
 class EditUserActivity : AppCompatActivity() {
     private var imageUri: Uri? = null
+    private var imageName: String? = ""
     private val api by lazy { RetrofitClient.instanceUser }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_user)
         val idUser = intent.getStringExtra("idUser")
-        val namaGambar = intent.getStringExtra("namaGambar")
+        imageName = intent.getStringExtra("namaGambar")
         inputEditNama.setText(intent.getStringExtra("nama"))
         inputEditAlamat.setText(intent.getStringExtra("alamat"))
         inputEditEmail.setText(intent.getStringExtra("email"))
@@ -46,18 +48,22 @@ class EditUserActivity : AppCompatActivity() {
             pilihGambar()
         }
         btnEditUser.setOnClickListener {
-            if (imageUri == null ){
-                editPengguna(idUser!!,namaGambar!!)
-            } else {
-                editPenggunaWithImage(idUser!!,imageUri!!,namaGambar!!)
-            }
+            editPenggunaWithImage(idUser!!,imageUri)
         }
     }
 
     private fun pilihGambar(){
-        Intent(Intent.ACTION_PICK).also{
-            it.type = "image/*"
-            startActivityForResult(it, REQUEST_CODE_IMAGE_PICKER)
+        if(EasyPermissions.hasPermissions(this,android.Manifest.permission.READ_EXTERNAL_STORAGE)){
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, REQUEST_CODE_IMAGE_PICKER)
+        }else{
+            // Menampilkan permission request saat belum mendapat permission dari user
+            EasyPermissions.requestPermissions(
+                this,
+                "This application need your permission to access photo gallery.",
+                991,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE)
         }
     }
 
@@ -93,7 +99,42 @@ class EditUserActivity : AppCompatActivity() {
         }
     }
 
-    private fun editPengguna(idUser: String, namaGambar: String){
+    private fun editPenggunaWithImage(idUser: String,imageUri: Uri?) {
+        // Jika user tidak upload ulang gambar, maka gunakan gambar user yang sebelumnya
+        if (imageUri == null){
+            editPengguna(idUser)
+        } else {
+            // Jika user mengubah gambar, maka ubah gambar user dengan upload gambar ke server
+            val filePath = getPathFromURI(this, imageUri)
+            val file = File(filePath)
+            val mFile = RequestBody.create("multipart".toMediaTypeOrNull(), file)
+            imageName = file.name
+            val body: MultipartBody.Part = MultipartBody.Part.createFormData("file", imageName, mFile)
+            RetrofitImage().getService().uploadGambar(
+                body
+            ).enqueue(object: Callback<UploadGambarResponse> {
+                override fun onResponse(
+                    call: Call<UploadGambarResponse>?,
+                    response: Response<UploadGambarResponse>?
+                ) {
+                    if (response!!.isSuccessful){
+                        if (response.body()?.status == 1){
+                            // Update pengguna ke dalam database
+                            editPengguna(idUser)
+                            Toast.makeText(this@EditUserActivity, "Berhasil upload foto!", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(this@EditUserActivity, "Gagal upload foto!", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                override fun onFailure(call: Call<UploadGambarResponse>, t: Throwable) {
+                    Toast.makeText(this@EditUserActivity, "Tidak ada respon $t", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+
+    }
+    private fun editPengguna(idUser: String){
         // Update pengguna ke dalam database
         api.updateUser(
             idUser,
@@ -102,7 +143,7 @@ class EditUserActivity : AppCompatActivity() {
             inputEditEmail.text.toString(),
             inputEditNama.text.toString(),
             inputEditAlamat.text.toString(),
-            namaGambar,
+            imageName.toString(),
             "update_pengguna"
         ).enqueue(object : Callback<DefaultResponse> {
             override fun onResponse(
@@ -119,61 +160,6 @@ class EditUserActivity : AppCompatActivity() {
                 }
             }
             override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                Toast.makeText(this@EditUserActivity, "Tidak ada respon $t", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
-
-    private fun editPenggunaWithImage(idUser: String,contentURI: Uri, namaGambar: String) {
-        // Upload gambar ke server
-        val filePath = getPathFromURI(this, contentURI)
-        val file = File(filePath)
-        val mFile = RequestBody.create("multipart".toMediaTypeOrNull(), file)
-        val body: MultipartBody.Part = MultipartBody.Part.createFormData("file", file.name, mFile)
-        RetrofitImage().getService().uploadGambar(
-            body
-        ).enqueue(object: Callback<UploadGambarResponse> {
-            override fun onResponse(
-                call: Call<UploadGambarResponse>?,
-                response: Response<UploadGambarResponse>?
-            ) {
-                if (response!!.isSuccessful){
-                    if (response.body()?.status == 1){
-                        // Update pengguna ke dalam database
-                        api.updateUser(
-                            idUser,
-                            inputEditUsername.text.toString(),
-                            inputEditPassword.text.toString(),
-                            inputEditEmail.text.toString(),
-                            inputEditNama.text.toString(),
-                            inputEditAlamat.text.toString(),
-                            file.name.toString(),
-                            "update_pengguna"
-                        ).enqueue(object : Callback<DefaultResponse> {
-                            override fun onResponse(
-                                call: Call<DefaultResponse>,
-                                response: Response<DefaultResponse>
-                            ) {
-                                if (response!!.isSuccessful){
-                                    if (response.body()?.status == 1){
-                                        Toast.makeText(this@EditUserActivity, "Berhasil edit pengguna!", Toast.LENGTH_SHORT).show()
-                                        finish()
-                                    }
-                                } else {
-                                    Toast.makeText(this@EditUserActivity, "Gagal edit pengguna", Toast.LENGTH_SHORT).show()
-                                }
-                            }
-                            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                                Toast.makeText(this@EditUserActivity, "Tidak ada respon $t", Toast.LENGTH_SHORT).show()
-                            }
-                        })
-                        Toast.makeText(this@EditUserActivity, "Berhasil upload foto!", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    Toast.makeText(this@EditUserActivity, "Gagal upload foto!", Toast.LENGTH_SHORT).show()
-                }
-            }
-            override fun onFailure(call: Call<UploadGambarResponse>, t: Throwable) {
                 Toast.makeText(this@EditUserActivity, "Tidak ada respon $t", Toast.LENGTH_SHORT).show()
             }
         })

@@ -3,4 +3,7 @@
     <style name="roundSquare" parent="">
         <item name="cornerSize">20dp</item>
     </style>
+    <style name="circular" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

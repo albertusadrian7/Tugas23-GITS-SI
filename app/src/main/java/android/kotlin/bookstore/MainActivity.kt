@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<BukuResponse>?, response: Response<BukuResponse>?) {
                 if (response!!.isSuccessful){
                     response.body()?.let { tampilBuku(it) }
-                    Toast.makeText(this@MainActivity, "Daftar Buku", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity, "Daftar Buku", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this@MainActivity, "Gagal mendapatkan daftar buku", Toast.LENGTH_LONG).show()
                 }

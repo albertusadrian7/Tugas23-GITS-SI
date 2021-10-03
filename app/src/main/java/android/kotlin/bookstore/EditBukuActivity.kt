@@ -16,13 +16,14 @@ class EditBukuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_buku)
+        val idBuku = intent.getStringExtra("idBuku")
         inputEditJudul.setText(intent.getStringExtra("judulBuku"))
-        inputEditHarga.setText(intent.getStringExtra("penulis"))
-        inputEditPenulis.setText(intent.getStringExtra("rating"))
-        inputEditRating.setText(intent.getStringExtra("harga"))
+        inputEditPenulis.setText(intent.getStringExtra("penulis"))
+        inputEditRating.setText(intent.getStringExtra("rating"))
+        inputEditHarga.setText(intent.getStringExtra("harga"))
         btnEdit.setOnClickListener {
             api.updateBuku(
-                "",
+                idBuku.toString(),
                 inputEditJudul.text.toString(),
                 inputEditPenulis.text.toString(),
                 inputEditRating.text.toString(),

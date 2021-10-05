@@ -9,16 +9,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitImage {
     private val BASE_URL = "http://192.168.43.84/bukuRestApi/"
 
-    fun getInterceptor() : OkHttpClient {
+    private fun getInterceptor(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
-        val okHttpClient = OkHttpClient.Builder()
+        return OkHttpClient.Builder()
             .addInterceptor(logging)
             .build()
-        return okHttpClient
     }
 
-    fun getRetrofit() : Retrofit {
+    private fun getRetrofit() : Retrofit {
         val gson = GsonBuilder()
             .setLenient()
             .create()
@@ -29,5 +28,5 @@ class RetrofitImage {
             .build()
     }
 
-    fun getService() = getRetrofit().create(UploadGambarApi::class.java)
+    fun getService(): UploadGambarApi = getRetrofit().create(UploadGambarApi::class.java)
 }

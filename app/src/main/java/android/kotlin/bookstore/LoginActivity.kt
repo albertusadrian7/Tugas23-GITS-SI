@@ -1,5 +1,6 @@
 package android.kotlin.bookstore
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -7,9 +8,12 @@ import android.kotlin.bookstore.model.UserResponse
 import android.kotlin.bookstore.service.RetrofitClient
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_tambah_buku.*
 import kotlinx.android.synthetic.main.card_user.*
@@ -46,9 +50,20 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, TambahUserActivity::class.java)
             startActivity(intent)
         }
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+            // Get FCM token
+            val token = task.result
+            token?.let { Log.d(TAG, it) }
+            Toast.makeText(baseContext, "Token saat ini: $token", Toast.LENGTH_LONG).show()
+            Log.d(TAG, "Token saat ini: $token")
+        })
     }
 
-    fun login(){
+    private fun login(){
         pesan()
     }
 

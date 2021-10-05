@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "2841003695",
+    "project_id": "bookstore-cdf7b",
+    "storage_bucket": "bookstore-cdf7b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2841003695:android:b8013625899d1640bcf65a",
+        "android_client_info": {
+          "package_name": "android.kotlin.bookstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2841003695-com1ta4vq422upg0qsclr1qqecktpeul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCn4WQ6OS7l28lKt7w8P6gqo5lfN01GPFo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2841003695-com1ta4vq422upg0qsclr1qqecktpeul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

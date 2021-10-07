@@ -40,4 +40,13 @@ object RetrofitClient {
             .build()
         retrofit.create(UserApiInterface::class.java)
     }
+
+    val instanceFirebase: NotificationAPI by lazy{
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+        retrofit.create(NotificationAPI::class.java)
+    }
 }

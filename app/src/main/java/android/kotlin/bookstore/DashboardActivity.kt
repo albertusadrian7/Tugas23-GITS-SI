@@ -49,6 +49,10 @@ class DashboardActivity : AppCompatActivity() {
             val intent = Intent(this,UserActivity::class.java)
             startActivity(intent)
         }
+        btnNotif.setOnClickListener {
+            val intent = Intent(this,FormSeederActivity::class.java)
+            startActivity(intent)
+        }
     }
     private fun logout(){
         val editor: SharedPreferences.Editor = sharedPreferences.edit()

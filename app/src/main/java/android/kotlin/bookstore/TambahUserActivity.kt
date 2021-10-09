@@ -95,7 +95,7 @@ class TambahUserActivity : AppCompatActivity() {
     private fun insertUserWithImage(imageUri: Uri?) {
         // Jika pengguna belum upload gambar, maka aplikasi akan menampilkan pesan
         if (imageUri == null){
-            imageName = "user.png"
+            imageName = "user_def.png"
             insertUser()
         } else {
             // Upload gambar ke server

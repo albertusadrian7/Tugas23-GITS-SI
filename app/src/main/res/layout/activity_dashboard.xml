@@ -22,15 +22,15 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/vw_imgUser"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:scaleType="centerCrop"
-        app:shapeAppearanceOverlay="@style/circular"
         android:src="@drawable/user"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboard" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard"
+        app:shapeAppearanceOverlay="@style/circular" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -145,22 +145,23 @@
         android:id="@+id/hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Hello,"
         android:textColor="@color/dark_blue"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vw_imgUser" />
+        app:layout_constraintTop_toTopOf="@+id/vw_imgUser" />
 
     <TextView
         android:id="@+id/namaUser"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Teks Nama"
-        android:textSize="28sp"
-        android:textColor="@color/dark_blue"
+        android:layout_marginRight="10dp"
         android:fontFamily="@font/poppins_semibold"
+        android:text="Teks Nama"
+        android:textColor="@color/dark_blue"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/vw_imgUser"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hello" />
 
@@ -168,10 +169,10 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/card_box"
-        app:layout_constraintTop_toBottomOf="@+id/namaUser"
+        android:padding="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/vw_imgUser"
         tools:layout_editor_absoluteX="1dp">
 
         <Button
@@ -179,15 +180,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_button_white"
-            android:fontFamily="@font/poppins_semibold"
             android:drawableLeft="@drawable/btn_book_list"
             android:drawablePadding="20dp"
+            android:fontFamily="@font/poppins_semibold"
             android:gravity="center_vertical"
             android:padding="10dp"
             android:text="Daftar Buku"
-            android:textSize="14sp"
             android:textAllCaps="false"
             android:textColor="@color/dark_blue"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -196,19 +197,39 @@
             android:id="@+id/daftarUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/custom_button_white"
-            android:fontFamily="@font/poppins_semibold"
-            android:gravity="center_vertical"
             android:drawableLeft="@drawable/btn_user_list"
             android:drawablePadding="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center_vertical"
             android:padding="10dp"
             android:text="Daftar User"
             android:textAllCaps="false"
             android:textColor="@color/dark_blue"
             android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@+id/daftarBuku"
-            tools:layout_editor_absoluteX="49dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/daftarBuku" />
+
+        <Button
+            android:id="@+id/btnNotif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/custom_button_white"
+            android:drawableLeft="@drawable/btn_bell"
+            android:drawablePadding="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="Push Notification"
+            android:textAllCaps="false"
+            android:textColor="@color/dark_blue"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/daftarUser" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

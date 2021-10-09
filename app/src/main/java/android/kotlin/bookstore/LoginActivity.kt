@@ -50,17 +50,6 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, TambahUserActivity::class.java)
             startActivity(intent)
         }
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
-            // Get FCM token
-            val token = task.result
-            token?.let { Log.d(TAG, it) }
-            Toast.makeText(baseContext, "Token saat ini: $token", Toast.LENGTH_LONG).show()
-            Log.d(TAG, "Token saat ini: $token")
-        })
     }
 
     private fun login(){
@@ -88,9 +77,6 @@ class LoginActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<UserResponse>?, response: Response<UserResponse>?) {
                         if (response!!.isSuccessful){
                             if (response.body()?.status == 1){
-                                val pesan = Toast.makeText(applicationContext, "Login berhasil!", Toast.LENGTH_LONG)
-                                pesan.setGravity(Gravity.TOP,0,140)
-                                pesan.show()
                                 editor.putString(KEY_USERNAME,
                                     response.body()!!.data!![0]?.username
                                 )

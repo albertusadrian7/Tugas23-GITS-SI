@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,130 +8,172 @@
     android:padding="20dp"
     android:background="@color/white"
     tools:context=".MainActivity">
+
     <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="80dp"
         android:layout_height="70dp"
-        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
         android:src="@drawable/novel"
-        android:layout_gravity="center"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:fontFamily="@font/poppins_bold"
-        android:textSize="20sp"
+        android:text="Welcome to Book Store!"
         android:layout_marginTop="20dp"
         android:textAlignment="center"
-        android:layout_gravity="center"
         android:textColor="@color/dark_blue"
-        android:text="Welcome to Book Store!" />
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
     <TextView
+        android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:textSize="14sp"
-        android:textAlignment="center"
         android:layout_gravity="center"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Find your favorite book"
+        android:textAlignment="center"
         android:textColor="@color/dark_blue"
-        android:text="Find your favorite book" />
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <EditText
         android:id="@+id/input_username"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/poppins"
         android:layout_marginHorizontal="16dp"
-        android:textSize="12sp"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        android:drawablePadding="12dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/ic_person"
+        android:drawablePadding="12dp"
+        android:fontFamily="@font/poppins"
+        android:hint="Masukkan username"
+        android:padding="10dp"
+        android:textColor="@color/black"
         android:textColorHint="@color/neutral_grey"
-        android:hint="Masukkan username"/>
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <EditText
         android:id="@+id/input_password"
-        android:background="@drawable/custom_input"
-        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
         android:layout_marginHorizontal="16dp"
-        android:ems="10"
-        android:padding="10dp"
-        android:textSize="12sp"
-        android:textColorHint="@color/neutral_grey"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_lock"
+        android:layout_marginTop="20dp"
         android:drawablePadding="12dp"
+        android:ems="10"
         android:fontFamily="@font/poppins"
         android:hint="Masukkan password"
-        android:drawableStart="@drawable/ic_lock"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/neutral_grey"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_username" />
 
     <Button
         android:id="@+id/signin_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/white"
-        android:background="@drawable/custom_button"
         android:layout_marginHorizontal="16dp"
+        android:background="@drawable/custom_button"
+        android:layout_marginTop="30dp"
+        android:text="Sign in"
         android:textAllCaps="false"
-        android:text="Sign in" />
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_password" />
 
     <TextView
+        android:id="@+id/textView8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ATAU"
         android:fontFamily="@font/poppins_bold"
+        android:text="ATAU"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:textColor="@color/neutral_grey"
         android:textSize="12sp"
-        android:textColor="@color/neutral_grey"
-        android:layout_marginTop="20dp"
-        android:textAlignment="center"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signin_button" />
+
     <Button
-        android:id="@+id/google_button"
+        android:id="@+id/btnFingerprint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="16dp"
-        android:textAllCaps="false"
-        android:background="@drawable/custom_button_light"
-        android:textColor="@color/neutral_grey"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_button"
+        android:drawableLeft="@drawable/ic_fingerprint"
         android:paddingHorizontal="15dp"
-        android:drawableLeft="@drawable/icon_google"
-        android:text="Login with Google" />
-    <Button
-        android:id="@+id/facebook_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="16dp"
-        android:backgroundTint="@color/neutral_light"
-        android:background="@drawable/custom_button_light"
+        android:text="Login dengan Fingerprint"
         android:textAllCaps="false"
-        android:paddingHorizontal="15dp"
-        android:textColor="@color/neutral_grey"
-        android:drawableLeft="@drawable/icon_facebook"
-        android:text="Login with Facebook" />
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
     <TextView
+        android:id="@+id/tvStatusAuth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text=""
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/dark_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFingerprint" />
+
+    <TextView
+        android:id="@+id/textView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Don't have an account?"
         android:fontFamily="@font/poppins"
-        android:textStyle="bold"
+        android:text="Don't have an account?"
+        android:textAlignment="center"
         android:textColor="@color/light_blue"
         android:textSize="12sp"
-        android:layout_marginTop="20dp"
-        android:textAlignment="center"/>
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/register_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
         android:id="@+id/register_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/white"
+        android:layout_marginHorizontal="16dp"
         android:background="@drawable/custom_button"
         android:backgroundTint="@color/light_blue"
-        android:layout_marginHorizontal="16dp"
+        android:text="Register"
         android:textAllCaps="false"
-        android:text="Register" />
-</LinearLayout>
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

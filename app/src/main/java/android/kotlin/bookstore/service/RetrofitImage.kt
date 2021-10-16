@@ -1,5 +1,6 @@
 package android.kotlin.bookstore.service
 
+import android.kotlin.bookstore.Constants.Companion.BASE_URL
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -7,8 +8,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitImage {
-    private val BASE_URL = "http://192.168.43.84/bukuRestApi/"
-
     private fun getInterceptor(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY

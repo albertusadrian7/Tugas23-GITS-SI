@@ -1,6 +1,7 @@
 package android.kotlin.bookstore.adapter
 
 import android.content.Intent
+import android.kotlin.bookstore.Constants.Companion.BASE_URL
 import android.kotlin.bookstore.EditUserActivity
 import android.kotlin.bookstore.R
 import android.kotlin.bookstore.model.UserItem
@@ -20,7 +21,7 @@ class UserAdapter(
     val listUser: ArrayList<UserItem>,
     val listener: OnAdapterListener
 ): RecyclerView.Adapter<UserAdapter.ViewHolder>() {
-    private val IMAGE_BASE = RetrofitClient.BASE_URL + "user_img/"
+    private val IMAGE_BASE = BASE_URL + "user_img/"
     fun setData(data : List<UserItem>){
         listUser.clear()
         listUser.addAll(data)

@@ -51,4 +51,18 @@ interface UserApiInterface {
         @Query("function") function: String
     ): Call<DefaultResponse>
 
+    @FormUrlEncoded
+    @POST("penggunaApi.php")
+    fun updateUserHardware(
+        @Field("id_user") idUser: String,
+        @Field("hardware_id") idHardware: String,
+        @Query("function") function: String
+    ): Call<DefaultResponse>
+
+    @FormUrlEncoded
+    @POST("penggunaApi.php")
+    fun loginByDevice(
+        @Field("hardware_id") idHardware: String,
+        @Query("function") function: String
+    ): Call<UserResponse>
 }

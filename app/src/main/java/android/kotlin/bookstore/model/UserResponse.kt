@@ -6,7 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class UserResponse(
-
 	@field:SerializedName("data")
 	val data: List<UserItem?>? = null,
 
@@ -34,6 +33,9 @@ data class UserItem(
 
 	@field:SerializedName("email")
 	val email: String? = null,
+
+	@field:SerializedName("hardware_id")
+	val hardwareId: String? = null,
 
 	@field:SerializedName("username")
 	val username: String? = null,

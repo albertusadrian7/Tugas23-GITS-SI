@@ -73,6 +73,8 @@ dependencies {
     // Biometric
     implementation("androidx.biometric:biometric:1.2.0-alpha03")
 
+    // Animasi
+    implementation "com.airbnb.android:lottie:4.2.0"
 }
 
 apply plugin: 'com.android.application'

@@ -22,9 +22,10 @@
         <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/activity_dashboard.xml" value="0.264" />
         <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/activity_edit_buku.xml" value="0.152" />
         <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/activity_edit_user.xml" value="0.4" />
-        <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/activity_form_seeder.xml" value="0.264" />
+        <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/activity_form_seeder.xml" value="0.2" />
         <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/activity_new_book.xml" value="0.13333333333333333" />
         <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/activity_tambah_buku.xml" value="0.264" />
         <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/activity_tambah_user.xml" value="0.2" />
@@ -33,7 +34,9 @@
         <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/backup_card_user.xml" value="0.4" />
         <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/card_buku.xml" value="0.3356401384083045" />
         <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/card_user.xml" value="0.2" />
+        <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/content_new_book.xml" value="0.176" />
         <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/daftar_buku.xml" value="0.264" />
+        <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/fragment_first.xml" value="0.264" />
         <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/layout/notification.xml" value="0.264" />
         <entry key="..\:/DUTA WACANA/Semester 5/Gits Kotlin/Tugas Week 18/BookStore/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.134375" />
       </map>

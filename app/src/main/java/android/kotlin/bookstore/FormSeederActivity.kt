@@ -1,28 +1,36 @@
 package android.kotlin.bookstore
 
+import android.app.*
 import android.content.ContentValues
+import android.content.Intent
 import android.kotlin.bookstore.model.NotificationResponse
 import android.kotlin.bookstore.service.RetrofitClient
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_form_seeder.*
 import kotlinx.android.synthetic.main.activity_tambah_buku.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 const val TOPIC = "/topics/novel"
 var TOKEN = ""
 class FormSeederActivity : AppCompatActivity() {
+    // Atribut untuk Alarm Notifikasi
+    private lateinit var calendar: Calendar
+    private lateinit var alarmManager: AlarmManager
+    private lateinit var pendingIntent: PendingIntent
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form_seeder)
+        createNotificationChannel()
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
@@ -48,6 +56,24 @@ class FormSeederActivity : AppCompatActivity() {
                 }
             }
         }
+        btnPickAlarm.setOnClickListener {
+            // Memilih waktu
+            pickAlarm()
+        }
+        btnSetAlarm.setOnClickListener {
+            // Set Alarm Notifikasi
+            setAlarm()
+        }
+    }
+
+    private fun pickAlarm() {
+        calendar = Calendar.getInstance()
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+            calendar.set(Calendar.HOUR_OF_DAY,hour)
+            calendar.set(Calendar.MINUTE, minute)
+            jam.text = SimpleDateFormat("HH:mm").format(calendar.time)
+        }
+        TimePickerDialog(this,timeSetListener,calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),true).show()
     }
 
     private fun sendNotification(notification: PushNotification) {
@@ -75,4 +101,28 @@ class FormSeederActivity : AppCompatActivity() {
             }
         })
     }
+    private fun createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val nama: CharSequence = "notifikasi_alarm"
+            val description = "Channel untuk Notifikasi Alarm"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("notification_channel", nama, importance)
+            channel.description = description
+            val notificationManager = getSystemService(
+                NotificationManager::class.java
+            )
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    private fun setAlarm(){
+        alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this,AlarmReceiver::class.java)
+        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
+        alarmManager.setExact(
+            AlarmManager.RTC_WAKEUP,calendar.timeInMillis,pendingIntent
+        )
+        Toast.makeText(this,"Alarm set successfuly",Toast.LENGTH_SHORT).show()
+    }
+
 }

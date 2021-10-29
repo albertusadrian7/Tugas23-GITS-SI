@@ -1,10 +1,16 @@
 package android.kotlin.bookstore
 
+import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.kotlin.bookstore.model.UserResponse
 import android.kotlin.bookstore.service.RetrofitClient
+import android.media.MediaPlayer
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
@@ -18,6 +24,7 @@ import kotlinx.android.synthetic.main.card_user.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 import java.util.concurrent.Executor
 
 class LoginActivity : AppCompatActivity() {
@@ -36,9 +43,15 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
     private lateinit var deviceId: String
+
+    // Atribut untuk Notifikasi Alarm
+    private lateinit var calendar: Calendar
+    private lateinit var alarmManager: AlarmManager
+    private lateinit var pendingIntent: PendingIntent
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        createNotificationChannel()
         deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
         // Init Biometric
         executor = ContextCompat.getMainExecutor(this)
@@ -85,6 +98,7 @@ class LoginActivity : AppCompatActivity() {
         btnFingerprint.setOnClickListener {
             biometricPrompt.authenticate(promptInfo)
         }
+
     }
 
     // Login biasa menggunakan username dan password
@@ -154,9 +168,6 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
-    private fun checkLoginByBiometric(checkSuccess: Boolean = false): Boolean {
-        return checkSuccess
-    }
     private fun sendSharedPreferences(editor: SharedPreferences.Editor, response: Response<UserResponse>){
         editor.putString(KEY_USERID,
             response.body()!!.data!![0]?.idUser
@@ -180,6 +191,36 @@ class LoginActivity : AppCompatActivity() {
         editor.apply()
         val intent = Intent(this@LoginActivity,DashboardActivity::class.java)
         startActivity(intent)
+        setAlarmDefault()
         finish()
+    }
+    private fun createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val nama: CharSequence = "default_notifikasi_alarm"
+            val description = "Channel untuk Default Notifikasi Alarm"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("default_notification_channel", nama, importance)
+            channel.description = description
+            val notificationManager = getSystemService(
+                NotificationManager::class.java
+            )
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+    // Set Alarm Default saat User Login yaitu Jam 7
+    private fun setAlarmDefault(){
+        calendar = Calendar.getInstance()
+        calendar[Calendar.HOUR_OF_DAY] = 7
+        calendar[Calendar.MINUTE] = 0
+        calendar[Calendar.SECOND] = 0
+        calendar[Calendar.MILLISECOND] = 0
+        alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this,AlarmReceiver::class.java)
+        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,pendingIntent
+        )
+        Toast.makeText(this,"Alarm default set successfuly",Toast.LENGTH_SHORT).show()
     }
 }
